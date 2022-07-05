@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import dayjs from 'dayjs'
+import dayjs, { type ManipulateType } from 'dayjs'
 
 import { defineComponent } from "vue";
 export default defineComponent({
@@ -82,83 +82,42 @@ export default defineComponent({
                 field.setAttribute("aria-invalid", "true");
             }
         },
-        // handleCursorJump(start: number,end: number) {
+        handleCursorJump(keyPressed: string, start: number, end: number, type: ManipulateType, index: number) {
+            const field = this.$refs.inputElement as HTMLInputElement;
 
-        // },
+            if (keyPressed == 'ArrowRight') {
+                field.selectionEnd = end
+            }
+            if (keyPressed == 'ArrowLeft') {
+                field.selectionEnd = start
+            }
+
+            if (keyPressed == 'ArrowUp') {
+                const date = dayjs(this.value).add(1, type)
+                this.value = date.format('MM/DD/YYYY')
+                this.$nextTick(() => {
+                    field.selectionEnd = index
+                })
+            }
+            if (keyPressed == 'ArrowDown') {
+                const date = dayjs(this.value).subtract(1, type)
+                this.value = date.format('MM/DD/YYYY')
+                this.$nextTick(() => {
+                    field.selectionEnd = index
+                })
+            }
+        },
         handleArrows(evt: KeyboardEvent) {
             console.log(evt)
-            const field = this.$refs.inputElement as HTMLInputElement;
             // 0M1M2/3D4D5/6Y7Y8Y9Y10
-
             const keyPressed = evt.key;
-            // console.log('index', (evt.target as any).selectionStart)
             const index = (evt.target as any).selectionStart
             if (index >= 0 && index < 3) {
-                if (keyPressed == 'ArrowRight') {
-                    field.selectionEnd = 2
-                }
-                if (keyPressed == 'ArrowLeft') {
-                    field.selectionEnd = 0
-                }
-
-                if (keyPressed == 'ArrowUp') {
-                    const date = dayjs(this.value).add(1, 'month')
-                    this.value = date.format('MM/DD/YYYY')
-                    this.$nextTick(() => {
-                        field.selectionEnd = index
-                    })
-                }
-                if (keyPressed == 'ArrowDown') {
-                    const date = dayjs(this.value).subtract(1, 'month')
-                    this.value = date.format('MM/DD/YYYY')
-                    this.$nextTick(() => {
-                        field.selectionEnd = index
-                    })
-                }
+                this.handleCursorJump(keyPressed, 0, 2, 'month', index)
             } else if (index >= 3 && index <= 5) {
-                if (keyPressed == 'ArrowRight') {
-                    field.selectionEnd = 5
-                }
-                if (keyPressed == 'ArrowLeft') {
-                    field.selectionEnd = 3
-                }
-
-                if (keyPressed == 'ArrowUp') {
-                    const date = dayjs(this.value).add(1, 'day')
-                    this.value = date.format('MM/DD/YYYY')
-                    this.$nextTick(() => {
-                        field.selectionEnd = index
-                    })
-                }
-                if (keyPressed == 'ArrowDown') {
-                    const date = dayjs(this.value).subtract(1, 'day')
-                    this.value = date.format('MM/DD/YYYY')
-                    this.$nextTick(() => {
-                        field.selectionEnd = index
-                    })
-                }
+                this.handleCursorJump(keyPressed, 3, 5, 'day', index)
             } else {
-                if (keyPressed == 'ArrowRight') {
-                    field.selectionEnd = 10
-                }
-                if (keyPressed == 'ArrowLeft') {
-                    field.selectionEnd = 6
-                }
-
-                if (keyPressed == 'ArrowUp') {
-                    const date = dayjs(this.value).add(1, 'year')
-                    this.value = date.format('MM/DD/YYYY')
-                    this.$nextTick(() => {
-                        field.selectionEnd = index
-                    })
-                }
-                if (keyPressed == 'ArrowDown') {
-                    const date = dayjs(this.value).subtract(1, 'year')
-                    this.value = date.format('MM/DD/YYYY')
-                    this.$nextTick(() => {
-                        field.selectionEnd = index
-                    })
-                }
+                this.handleCursorJump(keyPressed, 6, 10, 'year', index)
             }
         }
     }
