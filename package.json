@@ -1,6 +1,8 @@
 {
   "name": "@darrenx/dateinput",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/my-lib.umd.js",
   "module": "./dist/my-lib.es.js",
   "exports": {
@@ -9,7 +11,6 @@
       "require": "./dist/my-lib.umd.js"
     }
   },
-
   "version": "0.0.1",
   "scripts": {
     "dev": "vite",
@@ -20,6 +21,7 @@
   },
   "dependencies": {
     "@vue/cli-service": "^5.0.6",
+    "dayjs": "^1.11.3",
     "vue": "^3.2.37"
   },
   "devDependencies": {

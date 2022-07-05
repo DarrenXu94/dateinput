@@ -7,12 +7,17 @@ export default defineComponent({
     updateDate(date: Date) {
       console.log('date', date)
     }
-  }
+  },
+  data() {
+    return {
+      value: new Date
+    }
+  },
 })
 </script>
 
 <template>
-  <DateInput @update:date="updateDate" />
+  <DateInput @update:date="updateDate" :initial-date="value" />
 </template>
 
 <style>
