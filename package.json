@@ -17,7 +17,8 @@
     "build": "run-p type-check build-only",
     "preview": "vite preview --port 4173",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit"
+    "type-check": "vue-tsc --noEmit",
+    "publish-package": "npm version patch && npm publish"
   },
   "dependencies": {
     "@vue/cli-service": "^5.0.6",
