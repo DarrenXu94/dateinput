@@ -2,6 +2,7 @@
 
 <template>
     <div>
+        {{ value }}
         <label for="BDay01" id="BDay01Label">
             Birth date
             <span>(MM/DD/YYYY)</span>:

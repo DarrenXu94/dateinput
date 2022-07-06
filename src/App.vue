@@ -17,6 +17,7 @@ export default defineComponent({
 </script>
 
 <template>
+  <h2>Provider</h2>
   <DateInput @update:date="updateDate" :initial-date="value" />
 </template>
 
