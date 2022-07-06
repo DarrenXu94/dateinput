@@ -11,7 +11,7 @@
       "require": "./dist/my-lib.umd.js"
     }
   },
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
