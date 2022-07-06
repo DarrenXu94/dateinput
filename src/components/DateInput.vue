@@ -73,6 +73,7 @@ export default defineComponent({
                 confirm.innerText =
                     "You entered " + theMonth + " " + theDay + ", " + theYear + "."
                 field.setAttribute("aria-invalid", "false");
+                this.value = dayjs(objDate).format('MM/DD/YYYY')
                 this.$emit('update:date', objDate)
 
             } else {
@@ -94,7 +95,6 @@ export default defineComponent({
 
             if (keyPressed == 'ArrowUp') {
                 const date = dayjs(this.value).add(1, type)
-                console.log(date)
                 this.value = date.format('MM/DD/YYYY')
                 this.$nextTick(() => {
                     field.selectionEnd = index
@@ -109,7 +109,6 @@ export default defineComponent({
             }
         },
         handleArrows(evt: KeyboardEvent) {
-            console.log(evt)
             // 0M1M2/3D4D5/6Y7Y8Y9Y10
             const keyPressed = evt.key;
             const index = (evt.target as any).selectionStart
