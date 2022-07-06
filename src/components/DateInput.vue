@@ -94,6 +94,7 @@ export default defineComponent({
 
             if (keyPressed == 'ArrowUp') {
                 const date = dayjs(this.value).add(1, type)
+                console.log(date)
                 this.value = date.format('MM/DD/YYYY')
                 this.$nextTick(() => {
                     field.selectionEnd = index
